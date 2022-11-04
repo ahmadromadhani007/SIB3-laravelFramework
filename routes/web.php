@@ -31,4 +31,5 @@ Route::get('/nilai', function () {
 });
 
 Route::get('/mahasiswa', [MahasiswaController::class, 'dataMahasiswa']);
+
 Route::get('/nilai_mhs', [MahasiswaController::class, 'nilaiMahasiswa']);

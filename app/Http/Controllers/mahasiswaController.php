@@ -18,4 +18,23 @@ class mahasiswaController extends Controller
             compact('m1', 'am1', 'm2', 'am2')
         );
     }
+
+    public function nilaiMahasiswa()
+    {
+        $data = ['Ahmad Romadhani'];
+        //array scalar
+
+        $s1 = ['nama' => 'Zainul', 'nilai' => 85];
+        $s2 = ['nama' => 'Fuad', 'nilai' => 58];
+        $s3 = ['nama' => 'Uswatun', 'nilai' => 95];
+        $s4 = ['nama' => 'Hasanah', 'nilai' => 30];
+        //array assocative
+        $mhs = [$s1, $s2, $s3, $s4];
+
+        return view(
+            'nilai_mhs',
+            ['data' => $mhs]
+
+        );
+    }
 }
