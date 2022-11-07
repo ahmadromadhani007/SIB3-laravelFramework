@@ -55,3 +55,10 @@ Route::get('/contact', function () {
 Route::get('/login', function () {
     return view('landingpage.login_form');
 });
+
+//---------------routing admin page--------------
+Route::get('/administrator', function () {
+    return view('admin.home');
+});
+
+//---------------routing admin page--------------
