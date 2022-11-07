@@ -21,9 +21,6 @@ class mahasiswaController extends Controller
 
     public function nilaiMahasiswa()
     {
-        $data = ['Ahmad Romadhani'];
-        //array scalar
-
         $s1 = ['nama' => 'Zainul', 'nilai' => 85];
         $s2 = ['nama' => 'Fuad', 'nilai' => 58];
         $s3 = ['nama' => 'Uswatun', 'nilai' => 95];
@@ -33,7 +30,7 @@ class mahasiswaController extends Controller
 
         return view(
             'nilai_mhs',
-            ['data' => $mhs]
+            compact('mhs')
 
         );
     }

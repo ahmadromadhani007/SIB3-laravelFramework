@@ -13,10 +13,11 @@ use App\Http\Controllers\MahasiswaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
 Route::get('/welcome', function () {
     return '<h1>Ahlan Wa Sahlan Semangat belajar Laravel9</h1>';
@@ -33,3 +34,24 @@ Route::get('/nilai', function () {
 Route::get('/mahasiswa', [MahasiswaController::class, 'dataMahasiswa']);
 
 Route::get('/nilai_mhs', [MahasiswaController::class, 'nilaiMahasiswa']);
+
+//--- Routing Landing pages---//
+Route::get('/', function () {
+    return view('landingpage.home');
+});
+
+Route::get('/home', function () {
+    return view('landingpage.home');
+});
+
+Route::get('/about', function () {
+    return view('landingpage.about');
+});
+
+Route::get('/contact', function () {
+    return view('landingpage.kontak');
+});
+
+Route::get('/login', function () {
+    return view('landingpage.login_form');
+});
