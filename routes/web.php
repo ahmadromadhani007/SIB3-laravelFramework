@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 
+use App\Http\Controllers\DivisiController;
+use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\PegawaiController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,3 +66,7 @@ Route::get('/administrator', function () {
 });
 
 //---------------routing admin page--------------
+
+Route::resource('divisi', DivisiController::class);
+Route::resource('jabatan', JabatanController::class);
+Route::resource('pegawai', PegawaiController::class);
