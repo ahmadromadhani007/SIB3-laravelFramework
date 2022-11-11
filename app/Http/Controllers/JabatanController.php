@@ -14,7 +14,8 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        $jabatan = Jabatan::all();
+        //$jabatan = Jabatan::all();
+        $jabatan = Jabatan::orderBy('id', 'DESC')->get();
         return view('jabatan.index', compact('jabatan'));
     }
 
@@ -25,7 +26,7 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('jabatan.form');
     }
 
     /**
@@ -36,8 +37,16 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|unique:jabatan|max:45'
+        ]);
+
+        Jabatan::create($request->all());
+
+        return redirect()->route('jabatan.index')
+            ->with('success', 'Jabatan Berhasil Disimpan');
     }
+
 
     /**
      * Display the specified resource.

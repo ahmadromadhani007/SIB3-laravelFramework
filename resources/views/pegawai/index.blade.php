@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="card recent-sales overflow-auto">
             <div class="card-body">
-                <h5 class="card-title">Pegawai<span> | DataNet</span></h5>
+                <h5 class="card-title">Pegawai<span> | SimPeg</span></h5>
 
                 <table class="table table-borderless datatable">
                     <thead>
@@ -26,11 +26,16 @@
                                 <th scope="row">{{ $no++ }}</th>
                                 <td>{{ $row->nip }}</td>
                                 <td>{{ $row->nama }}</td>
-                                <td>{{ $row->jabatan_id }}</td>
-                                <td>{{ $row->divisi_id }}</td>
+                                <td>{{ $row->jabatan->nama }}</td>
+                                <td>{{ $row->divisi->nama }}</td>
                                 <td>{{ $row->gender }}</td>
                                 <td>{{ $row->foto }}</td>
-                                <td></td>
+                                <td>
+                                    <a class="btn btn-info btn-sm" title="Detail Pegawai"
+                                        href="{{ route('pegawai.show', $row->id) }}">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
 
