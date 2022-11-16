@@ -4,27 +4,19 @@
     <div class="col-12">
         <div class="card recent-sales overflow-auto">
             <div class="card-body">
-                <h5 class="card-title">Jabatan<span> | SimPeg</span></h5>
-                <br>
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        <p>{{ $message }}
-                        </p>
-                    </div>
-                @endif
-                <br>
-                <a href="{{ route('jabatan.create') }}" class="btn btn-outline-primary">Tambah</a>
-                <br>
+                <h5 class="card-title">Divisi<span> | SimPeg</span></h5>
+
                 <table class="table table-borderless datatable">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @php $no= 1;@endphp
-                        @foreach ($jabatan as $row)
+                        @foreach ($divisi as $row)
                             <tr>
                                 <th scope="row">{{ $no++ }}</th>
                                 <td>{{ $row->nama }}</td>

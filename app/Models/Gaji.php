@@ -5,16 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Divisi extends Model
+class Gaji extends Model
 {
     use HasFactory;
 
-    protected $table = 'divisi';
-
-    protected $fillable = ['nama'];
+    protected $table = 'gaji';
 
     public function pegawai()
     {
-        return $this->hasMany(Pegawai::class);
+        return $this->belongsTo(Pegawai::class);
     }
 }

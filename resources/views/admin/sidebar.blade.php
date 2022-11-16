@@ -25,6 +25,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ url('/divisi') }}">
+                        <i class="bi bi-circle"></i><span>Divisi</span>
+                    </a>
+                </li>
+                <li>
                     <a href="components-badges.html">
                         <i class="bi bi-circle"></i><span>Badges</span>
                     </a>

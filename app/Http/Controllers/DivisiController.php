@@ -25,7 +25,7 @@ class DivisiController extends Controller
      */
     public function create()
     {
-        //
+        return view('divisi.form');
     }
 
     /**
