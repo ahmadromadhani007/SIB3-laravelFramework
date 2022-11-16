@@ -36,9 +36,15 @@ class DivisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nama' => 'required|unique:divisi|max:45'
+        ]);
 
+        Divisi::create($request->all());
+
+        return redirect()->route('divisi.index')
+            ->with('success', 'Divisi Berhasil Disimpan');
+    }
     /**
      * Display the specified resource.
      *
