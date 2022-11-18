@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Pegawai;
 use App\Models\Jabatan;
 use App\Models\Divisi;
-
+use App\Exports\PegawaiExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PegawaiController extends Controller
 {
@@ -187,5 +189,32 @@ class PegawaiController extends Controller
         Pegawai::where('id', $id)->delete();
         return redirect()->route('pegawai.index')
             ->with('success', 'Data Pegawai Berhasil Dihapus');
+    }
+
+    public function generatePDF()
+    {
+
+        $data = [
+            'title' => 'Test Penggunaan Extensions PDF',
+            'date' => date('m/d/Y'),
+            'isi' => 'Menggunakan Pustaka barryvdh/laravel-dompdf'
+        ];
+
+        $pdf = Pdf::loadView('pegawai.myPDF', $data);
+
+        return $pdf->download('test_download.pdf');
+    }
+
+
+    public function pegawaiPDF()
+    {
+        $pegawai = Pegawai::all();
+        $pdf = Pdf::loadView('pegawai.pegawaiPDF', ['pegawai' => $pegawai]);
+        return $pdf->download('data_pegawai.pdf');
+    }
+
+    public function pegawaiExcel()
+    {
+        return Excel::download(new PegawaiExport, 'data_pegawai.xlsx');
     }
 }

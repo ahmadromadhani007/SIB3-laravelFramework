@@ -11,9 +11,17 @@
                     </div>
                 @endif
                 <br />
-                <a class="btn btn-primary btn-sm" title="Tambah Pegawai" href=" {{ route('pegawai.create') }}">
+                <a class="btn btn-primary" title="Tambah Pegawai" href=" {{ route('pegawai.create') }}">
                     <i class="bi bi-save"></i>
-                </a>
+                </a>&nbsp;
+                <a class="btn btn-danger" title="Export to PDF Pegawai" href=" {{ url('pegawai-pdf') }}">
+                    <i class="bi bi-file-earmark-pdf"></i>
+                </a>&nbsp;
+                <a class="btn btn-success" title="Export to Excel Pegawai" href="{{ url('pegawai-excel') }}">
+                    <i class="bi bi-file-earmark-excel"></i>
+                </a>&nbsp;
+
+                </a>&nbsp;
                 <br /><br />
                 <table class="table table-borderless datatable">
                     <thead>
@@ -57,7 +65,7 @@
                                         </a>
                                         &nbsp;
                                         <a class="btn btn-warning btn-sm" title="Ubah Pegawai"
-                                            href=" {{ url('pegawai-edit', $row->id) }}">
+                                            href=" {{ route('pegawai.edit', $row->id) }}">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         &nbsp;
