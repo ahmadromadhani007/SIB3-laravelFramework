@@ -6,6 +6,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +74,4 @@ Route::resource('pegawai', PegawaiController::class);
 Route::get('generate-pdf', [PegawaiController::class, 'generatePDF']);
 Route::get('pegawai-pdf', [PegawaiController::class, 'pegawaiPDF']);
 Route::get('pegawai-excel', [PegawaiController::class, 'pegawaiExcel']);
+Route::get('dashboard', [DashboardController::class, 'index']);
