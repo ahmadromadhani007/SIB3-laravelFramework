@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+//use RealRashid\SweetAlert\Facades\Alert;
+
 //tambahan
 use App\Models\Pegawai;
 use App\Models\Jabatan;
@@ -190,6 +192,16 @@ class PegawaiController extends Controller
         return redirect()->route('pegawai.index')
             ->with('success', 'Data Pegawai Berhasil Dihapus');
     }
+
+    public function delete($id)
+    {
+        //sebelum hapus data, hapus terlebih dahulu fisik file fotonya jika ada
+        $row = Pegawai::find($id);
+        if (!empty($row->foto)) unlink('admin/img/' . $row->foto);
+        Pegawai::find($id)->delete();
+        return back();
+    }
+
 
     public function generatePDF()
     {

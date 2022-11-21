@@ -14,11 +14,13 @@
                 <a class="btn btn-primary" title="Tambah Pegawai" href=" {{ route('pegawai.create') }}">
                     <i class="bi bi-save"></i>
                 </a>&nbsp;
-                <a class="btn btn-danger" title="Export to PDF Pegawai" href="{{ url('pegawai-pdf') }}">
+                <a class="btn btn-danger" title="Export to PDF Pegawai" href=" {{ url('pegawai-pdf') }}">
                     <i class="bi bi-file-earmark-pdf"></i>
                 </a>&nbsp;
                 <a class="btn btn-success" title="Export to Excel Pegawai" href="{{ url('pegawai-excel') }}">
                     <i class="bi bi-file-earmark-excel"></i>
+                </a>&nbsp;
+
                 </a>&nbsp;
                 <br /><br />
                 <table class="table table-borderless datatable">
@@ -54,10 +56,9 @@
                                     @endempty
                                 </td>
                                 <td width="15%">
-                                    <form method="POST" id="formDelete">
+                                    <form method="POST" action="{{ route('pegawai.destroy', $row->id) }}">
                                         @csrf
                                         @method('DELETE')
-
                                         <a class="btn btn-info btn-sm" title="Detail Pegawai"
                                             href=" {{ route('pegawai.show', $row->id) }}">
                                             <i class="bi bi-eye"></i>
@@ -68,8 +69,8 @@
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         &nbsp;
-                                        <button type="submit" data-action="{{ route('pegawai.destroy', $row->id) }}"
-                                            class="btn btn-danger btn-sm btnDelete" title="Hapus Pegawai">
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus Pegawai"
+                                            onclick="return confirm('Anda Yakin Data akan diHapus?')">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -78,31 +79,9 @@
                         @endforeach
                     </tbody>
                 </table>
+
             </div>
+
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <script type="text/javascript">
-        $('body').on('click', '.btnDelete', function(e) {
-            e.preventDefault();
-            var action = $(this).data('action');
-            Swal.fire({
-                title: 'Yakin ingin menghapus data ini?',
-                text: "Data yang sudah dihapus tidak bisa dikembalikan lagi",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                cancelButtonText: 'Batal',
-                confirmButtonText: 'Yakin'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#formDelete').attr('action', action);
-                    $('#formDelete').submit();
-                }
-            })
-        })
-    </script>
 @endsection

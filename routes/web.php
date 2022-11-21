@@ -71,6 +71,7 @@ Route::get('/administrator', function () {
 Route::resource('divisi', DivisiController::class);
 Route::resource('jabatan', JabatanController::class);
 Route::resource('pegawai', PegawaiController::class);
+// Route::delete('pegawai/{id}', [PegawaiController::class, 'delete']);
 Route::get('generate-pdf', [PegawaiController::class, 'generatePDF']);
 Route::get('pegawai-pdf', [PegawaiController::class, 'pegawaiPDF']);
 Route::get('pegawai-excel', [PegawaiController::class, 'pegawaiExcel']);
