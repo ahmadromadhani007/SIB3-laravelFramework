@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MahasiswaController;
 
 use App\Http\Controllers\DivisiController;
@@ -45,7 +46,7 @@ Route::get('/', function () {
     return view('landingpage.home');
 });
 
-Route::get('/home', function () {
+Route::get('/home1', function () {
     return view('landingpage.home');
 });
 
@@ -76,3 +77,7 @@ Route::get('generate-pdf', [PegawaiController::class, 'generatePDF']);
 Route::get('pegawai-pdf', [PegawaiController::class, 'pegawaiPDF']);
 Route::get('pegawai-excel', [PegawaiController::class, 'pegawaiExcel']);
 Route::get('dashboard', [DashboardController::class, 'index']);
+
+Auth::routes();
+
+Route::get('/home1', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

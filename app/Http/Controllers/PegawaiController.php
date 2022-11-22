@@ -53,17 +53,32 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         //proses input pegawai
-        $request->validate([
-            'nip' => 'required|unique:pegawai|max:3',
-            'nama' => 'required|max:45',
-            'jabatan_id' => 'required|integer',
-            'divisi_id' => 'required|integer',
-            'gender' => 'required',
-            'tmp_lahir' => 'required',
-            'tgl_lahir' => 'required',
-            'alamat' => 'nullable|string|min:10',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
-        ]);
+        $request->validate(
+            [
+                'nip' => 'required|unique:pegawai|max:3',
+                'nama' => 'required|max:45',
+                'jabatan_id' => 'required|integer',
+                'divisi_id' => 'required|integer',
+                'gender' => 'required',
+                'tmp_lahir' => 'required',
+                'tgl_lahir' => 'required',
+                'alamat' => 'nullable|string|min:10',
+                'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+            ],
+            //custom pesan errornya
+            [
+                'nip.required' => 'NIP Wajib Diisi',
+                'nip.unique' => 'NIP Sudah Ada (Terduplikasi)',
+                'nip.max' => 'NIP Maksimal 3 karakter',
+                'nama.required' => 'Nama Wajib Diisi',
+                'nama.max' => 'Nama Maksimal 45 karakter',
+                'jabatan_id.required' => 'Jabatan Wajib Diisi',
+                'jabatan_id.integer' => 'Jabatan Wajib Diisi Berupa dari Pilihan yg Tersedia',
+                'divisi_id.required' => 'Divisi Wajib Diisi',
+                'divisi_id.integer' => 'Divisi Wajib Diisi Berupa daro Pilihan yg Tersedia',
+                'gender.required' => 'Jenis Kelamin Wajib Diisi',
+            ]
+        );
         //Pegawai::create($request->all());
         //------------apakah user  ingin upload foto-----------
         if (!empty($request->foto)) {
