@@ -7,6 +7,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\GajiController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -67,17 +68,31 @@ Route::get('/administrator', function () {
     return view('admin.home');
 });
 
-//---------------routing admin page--------------
+Route::resource('gaji', GajiController::class)->middleware('peran:manager');
 
-Route::resource('divisi', DivisiController::class);
-Route::resource('jabatan', JabatanController::class);
-Route::resource('pegawai', PegawaiController::class);
-// Route::delete('pegawai/{id}', [PegawaiController::class, 'delete']);
-Route::get('generate-pdf', [PegawaiController::class, 'generatePDF']);
-Route::get('pegawai-pdf', [PegawaiController::class, 'pegawaiPDF']);
-Route::get('pegawai-excel', [PegawaiController::class, 'pegawaiExcel']);
-Route::get('dashboard', [DashboardController::class, 'index']);
+//---------------routing admin page--------------
+Route::middleware(['peran:manager-staff-admin'])->group(function () {
+    Route::resource('divisi', DivisiController::class);
+    Route::resource('jabatan', JabatanController::class);
+    Route::resource('gaji', GajiController::class);
+    Route::resource('pegawai', PegawaiController::class);
+    // Route::delete('pegawai/{id}', [PegawaiController::class, 'delete']);
+    Route::get('generate-pdf', [PegawaiController::class, 'generatePDF']);
+    Route::get('pegawai-pdf', [PegawaiController::class, 'pegawaiPDF']);
+    Route::get('pegawai-excel', [PegawaiController::class, 'pegawaiExcel']);
+    Route::get('dashboard', [DashboardController::class, 'index']);
+});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/after_register', function () {
+    return view('landingpage.after_register');
+});
+Route::get('/kelola_user', function () {
+    return view('admin.home');
+});
+Route::get('/acces_denied', function () {
+    return view('admin.access_denied');
+});

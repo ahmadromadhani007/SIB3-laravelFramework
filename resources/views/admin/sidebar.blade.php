@@ -30,11 +30,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="components-badges.html">
-                        <i class="bi bi-circle"></i><span>Badges</span>
+                    <a href="{{ url('/gaji') }}">
+                        <i class="bi bi-currency-dollar"></i><span>Gaji</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="components-breadcrumbs.html">
                         <i class="bi bi-circle"></i><span>Breadcrumbs</span>
                     </a>
@@ -88,7 +88,7 @@
                     <a href="components-tooltips.html">
                         <i class="bi bi-circle"></i><span>Tooltips</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li><!-- End Components Nav -->
 
