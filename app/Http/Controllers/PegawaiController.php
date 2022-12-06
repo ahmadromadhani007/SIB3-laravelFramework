@@ -28,7 +28,95 @@ class PegawaiController extends Controller
         $pegawai = Pegawai::orderBy('id', 'DESC')->get();
         return view('pegawai.index', compact('pegawai'));
     }
+    //!>>>>ORMS APIs<<<<
+    // public function apiPegawai()
+    // {
+    //     //menampilkan seluruh data
+    //     $pegawai = Pegawai::all();
+    //     return response()->json(
+    //         [
+    //             'success' => true,
+    //             'massage' => 'Data Pegawai',
+    //             'data' => $pegawai,
+    //         ],
+    //         200
+    //     );
+    // }
 
+    //!!!JoinTable Query
+    public function apiPegawai()
+    {
+        //menampilkan seluruh data
+        //$pegawai = Pegawai::all();
+        $pegawai = Pegawai::join('jabatan', 'jabatan.id', '=', 'pegawai.jabatan_id')
+            ->join('divisi', 'divisi.id', '=', 'pegawai.divisi_id')
+            ->select('pegawai.nip', 'pegawai.nama', 'pegawai.gender', 'jabatan.nama AS posisi', 'divisi.nama AS bagian', 'pegawai.tmp_lahir', 'pegawai.tgl_lahir', 'pegawai.alamat',)
+            ->get();
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Data Pegawai',
+                'data' => $pegawai,
+            ],
+            200
+        );
+    }
+
+    //!!!ORM 
+    // public function apiPegawaiDetail($id)
+    // {
+    //     //menampilkan seluruh data
+    //     $pegawai = Pegawai::find($id);
+    //     if ($pegawai) {
+    //         return response()->json(
+    //             [
+    //                 'success' => true,
+    //                 'massage' => 'Data Pegawai',
+    //                 'data' => $pegawai,
+    //             ],
+    //             200
+    //         );
+    //     } else {
+    //         return response()->json(
+    //             [
+    //                 'success' => false,
+    //                 'massage' => 'Datail Pegawai Not Found',
+
+    //             ],
+    //             404
+    //         );
+    //     }
+    // }
+    //!QueryBuilder
+    public function apiPegawaiDetail($id)
+    {
+        //menampilkan detail data seorang pegawai
+        //$pegawai = Pegawai::find($id);
+        $pegawai = Pegawai::join('jabatan', 'jabatan.id', '=', 'pegawai.jabatan_id')
+            ->join('divisi', 'divisi.id', '=', 'pegawai.divisi_id')
+            ->select('pegawai.nip', 'pegawai.nama', 'pegawai.gender', 'jabatan.nama AS posisi', 'divisi.nama AS bagian', 'pegawai.tmp_lahir', 'pegawai.tgl_lahir', 'pegawai.alamat',)
+            ->where('pegawai.id', '=', $id)
+            ->get();
+
+        if ($pegawai) { //jika data pegawai ditemukan
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Detail Pegawai',
+                    'data' => $pegawai,
+                ],
+                200
+            );
+        } else { //jika data pegawai tidak ditemukan
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Detail Pegawai Tidak ditemukan',
+                ],
+                404
+            );
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *

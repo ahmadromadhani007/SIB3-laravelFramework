@@ -96,3 +96,7 @@ Route::get('/kelola_user', function () {
 Route::get('/acces_denied', function () {
     return view('admin.access_denied');
 });
+
+//REST APIs JSON
+Route::get('/api-pegawai', [PegawaiController::class, 'apiPegawai']);
+Route::get('/api-pegawai/{id}', [PegawaiController::class, 'apiPegawaiDetail']);
