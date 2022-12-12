@@ -24,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/pegawai', [PegawaiController::class, 'index']);
 Route::get('/pegawai/{id}', [PegawaiController::class, 'show']);
 Route::post('/pegawai-create', [PegawaiController::class, 'store']);
+Route::put('/pegawai/{id}', [PegawaiController::class, 'update']);
+Route::delete('/pegawai/{id}', [PegawaiController::class, 'destroy']);

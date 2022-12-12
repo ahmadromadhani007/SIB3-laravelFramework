@@ -72,4 +72,46 @@ class PegawaiController extends Controller
 
         return new PegawaiResource(true, 'Data Pegawai Success Input', $pegawai);
     }
+
+    public function update(Request $request, $id)
+    {
+        //proses ubah pegawai
+        $validator = Validator::make($request->all(), [
+            'nip' => 'required|max:3',
+            'nama' => 'required|max:45',
+            'jabatan_id' => 'required|integer',
+            'divisi_id' => 'required|integer',
+            'gender' => 'required',
+            'tmp_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'alamat' => 'nullable|string|min:10',
+        ]);
+
+        //cek error atau tidak inputan data
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        //proses menyimpan data yg diinput
+        $pegawai = Pegawai::whereId($id)->update([
+            'nip' => $request->nip,
+            'nama' => $request->nama,
+            'jabatan_id' => $request->jabatan_id,
+            'divisi_id' => $request->divisi_id,
+            'gender' => $request->gender,
+            'tmp_lahir' => $request->tmp_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'alamat' => $request->alamat,
+        ]);
+
+        return new PegawaiResource(true, 'Data Pegawai Berhasil diubah', $pegawai);
+    }
+
+    public function destroy($id)
+    {
+        $pegawai = Pegawai::whereId($id)->first();
+        $pegawai->delete();
+
+        return new PegawaiResource(true, 'Data Pegawai Behasil di Hapus', $pegawai);
+    }
 }
