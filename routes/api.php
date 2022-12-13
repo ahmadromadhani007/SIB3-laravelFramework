@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PegawaiController;
+use App\Http\Controllers\Api\AuthController;
 
 
 /*
@@ -26,3 +27,7 @@ Route::get('/pegawai/{id}', [PegawaiController::class, 'show']);
 Route::post('/pegawai-create', [PegawaiController::class, 'store']);
 Route::put('/pegawai/{id}', [PegawaiController::class, 'update']);
 Route::delete('/pegawai/{id}', [PegawaiController::class, 'destroy']);
+
+//REST APIs Authentication
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
